@@ -21,6 +21,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.GenericFilterBean;
 
+
+/**
+ * @author dingan
+ *
+ */
 public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
 	private final static String USERNAME = "USERNAME";

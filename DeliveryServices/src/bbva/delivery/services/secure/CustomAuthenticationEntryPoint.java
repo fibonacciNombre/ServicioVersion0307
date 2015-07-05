@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
+
+/**
+ * @author dingan
+ *
+ */
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
     
     public void commence(HttpServletRequest request, HttpServletResponse response,

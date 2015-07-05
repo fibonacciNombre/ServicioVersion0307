@@ -16,6 +16,11 @@ import bbva.delivery.services.bean.ResponseTransferirArchivo;
 import bbva.delivery.services.bean.ResponseValidarCourier;
 import bbva.delivery.services.bean.Usuario;
 
+
+/**
+ * @author dingan
+ *
+ */
 public interface DeliveryService {
 
 	public void test();

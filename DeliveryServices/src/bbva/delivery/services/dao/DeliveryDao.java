@@ -16,6 +16,11 @@ import bbva.delivery.services.bean.Usuario;
 import bbva.delivery.services.bean.ValidarCourier;
 import bbva.delivery.services.bean.VisitasUsuario;
 
+
+/**
+ * @author dingan
+ *
+ */
 public interface DeliveryDao{
 	void test();
 	

@@ -2,6 +2,11 @@ package bbva.delivery.services.bean;
 
 import java.io.Serializable;
 
+
+/**
+ * @author dingan
+ *
+ */
 public class EmbeddedImages implements Serializable{
 
 	/**

@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+
+/**
+ * @author dingan
+ *
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Usuario implements Serializable {

@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
+
+/**
+ * @author dingan
+ *
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class ResponseTransferirArchivo implements Serializable{

@@ -70,6 +70,10 @@ import bbva.delivery.services.service.DeliveryService;
 
 
 
+/**
+ * @author dingan
+ *
+ */
 @Service("deliveryService")
 @Transactional(propagation=Propagation.SUPPORTS)
 public class DeliveryServiceImp implements DeliveryService {
@@ -124,6 +128,8 @@ public class DeliveryServiceImp implements DeliveryService {
 	}
 	
 	public void validarUsuarioToken(Usuario usuario) throws Exception{
+		logger.info("INI Service: Ejecutando metodo validarUsuarioToken");
+		System.out.println("INI Service: Ejecutando metodo validarUsuarioToken");
 		
 		DeliveryDaoImp daoImp = new DeliveryDaoImp();
 		String usuarioPassword = null;
@@ -139,41 +145,61 @@ public class DeliveryServiceImp implements DeliveryService {
 		cadenaDesencriptada = this.desencriptar(KEY, IV, cadenaEncriptada);
 		System.out.println("Encrip --> "+ cadenaEncriptada);
 		System.out.println("Desencrip --> "+ cadenaDesencriptada);
+		
+		System.out.println("FIN Service: Ejecutando metodo validarUsuarioToken");
+		logger.info("FIN Service: Ejecutando metodo validarUsuarioToken");
 	}
 	
 	public String encriptar(String key, String iv, String cleartext) throws Exception{
 		
-		 Cipher cipher = Cipher.getInstance(CI);
-         SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), ALG);
-         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
-         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivParameterSpec);
-         byte[] encrypted = cipher.doFinal(cleartext.getBytes());
-         return new String(encodeBase64(encrypted));
+		logger.info("INI Service: Ejecutando metodo encriptar");
+		System.out.println("INI Service: Ejecutando metodo encriptar");
+		
+		Cipher cipher = Cipher.getInstance(CI);
+		SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), ALG);
+		IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
+		cipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivParameterSpec);
+		byte[] encrypted = cipher.doFinal(cleartext.getBytes());
+		
+		System.out.println("FIN Service: Ejecutando metodo encriptar");
+		logger.info("FIN Service: Ejecutando metodo encriptar");
+		return new String(encodeBase64(encrypted));
 		
 	}
 	
 	public String desencriptar(String key, String iv, String encrypted) throws Exception{
-		 Cipher cipher = Cipher.getInstance(CI);
-         SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), ALG);
-         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
-         byte[] enc = decodeBase64(encrypted);
-         cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
-         byte[] decrypted = cipher.doFinal(enc);
-         return new String(decrypted);
+		logger.info("INI Service: Ejecutando metodo desencriptar");
+		System.out.println("INI Service: Ejecutando metodo desencriptar");
+		
+		Cipher cipher = Cipher.getInstance(CI);
+        SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), ALG);
+        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
+        byte[] enc = decodeBase64(encrypted);
+        cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
+        byte[] decrypted = cipher.doFinal(enc);
+        
+        System.out.println("FIN Service: Ejecutando metodo desencriptar");
+		logger.info("FIN Service: Ejecutando metodo desencriptar");
+        return new String(decrypted);
 	}
 	
 	public boolean validarUsuario(Usuario usuario) throws Exception{
+		logger.info("INI Service: Ejecutando metodo validarUsuario");
+		System.out.println("INI Service: Ejecutando metodo validarUsuario");
 		Usuario usr = deliveryDao.getUsuario(usuario);
 		if(usr != null){
 			if(usuario.getCodusuario().equals(usr.getCodusuario()) && usuario.getContrasena().equals(usr.getContrasena())){
 				return true;
 			}
 		}
+		System.out.println("FIN Service: Ejecutando metodo validarUsuario");
+		logger.info("FIN Service: Ejecutando metodo validarUsuario");
 		return false;
 	}
 	
 	public ResponseValidarCourier validarDNICourier(RequestValidarCourier requestValidarCourier){
-		
+		logger.info("INI Service: Ejecutando metodo validarDNICourier");
+		System.out.println("INI Service: Ejecutando metodo validarDNICourier");
 		ResponseValidarCourier responseValidarCourier = new ResponseValidarCourier();
 		
 		List<ValidarCourier> validarCouriers = deliveryDao.validarDNICourier(requestValidarCourier);
@@ -208,10 +234,15 @@ public class DeliveryServiceImp implements DeliveryService {
 			}
 		}
 
+		System.out.println("FIN Service: Ejecutando metodo validarDNICourier");
+		logger.info("FIN Service: Ejecutando metodo validarDNICourier");
+		
 		return responseValidarCourier;
 	}
 	
 	public ResponseGetVisitasUsuario getVisitasUsuario(RequestGetVisitasUsuario requestGetVisitasUsuario){
+		logger.info("INI Service: Ejecutando metodo getVisitasUsuario");
+		System.out.println("INI Service: Ejecutando metodo getVisitasUsuario");
 		
 		ResponseGetVisitasUsuario responseGetVisitasUsuario =  new ResponseGetVisitasUsuario();
 		String fecha = requestGetVisitasUsuario.getDia()+"/"+requestGetVisitasUsuario.getMes()+"/"+requestGetVisitasUsuario.getAnio();
@@ -222,10 +253,16 @@ public class DeliveryServiceImp implements DeliveryService {
 		
 		responseGetVisitasUsuario.setVisitasUsuarios(deliveryDao.getVisitasUsuario(requestGetVisitasUsuario, fecha));
 		responseGetVisitasUsuario.setTx(tx);
+		
+		System.out.println("FIN Service: Ejecutando metodo getVisitasUsuario");
+		logger.info("FIN Service: Ejecutando metodo getVisitasUsuario");
 		return responseGetVisitasUsuario;
 	}
 	
 	public ResponseChangeEstadoRegistro changeEstadoRegistro(RequestChangeEstadoRegistro requestChangeEstadoRegistro){
+		
+		logger.info("INI Service: Ejecutando metodo changeEstadoRegistro");
+		System.out.println("INI Service: Ejecutando metodo changeEstadoRegistro");
 		
 		ResponseChangeEstadoRegistro responseChangeEstadoRegistro =  new ResponseChangeEstadoRegistro();
 		Tx tx = new Tx();
@@ -241,10 +278,17 @@ public class DeliveryServiceImp implements DeliveryService {
 		estadoRegistro.setCodigoEntrega(rcr.getCodigoEntrega().toString());
 		responseChangeEstadoRegistro.setTx(tx);
 		responseChangeEstadoRegistro.setEstadoRegistro(estadoRegistro);
+		
+		System.out.println("FIN Service: Ejecutando metodo changeEstadoRegistro");
+		logger.info("FIN Service: Ejecutando metodo changeEstadoRegistro");
+		
 		return responseChangeEstadoRegistro;
 	}
 
 	public ResponseObtenerListaCourier obtenerListaCourier(){
+		logger.info("INI Service: Ejecutando metodo obtenerListaCourier");
+		System.out.println("INI Service: Ejecutando metodo obtenerListaCourier");
+		
 		ResponseObtenerListaCourier responseObtenerListaCourier = new ResponseObtenerListaCourier();
 		Tx tx = new Tx();
 		tx.setCodigo(CODIGO_TRX_CORRECTO);
@@ -253,11 +297,18 @@ public class DeliveryServiceImp implements DeliveryService {
 		couriers = deliveryDao.obtenerListaCourier();
 		responseObtenerListaCourier.setListaCourier(couriers);
 		responseObtenerListaCourier.setTx(tx);
+		
+		System.out.println("FIN Service: Ejecutando metodo obtenerListaCourier");
+		logger.info("FIN Service: Ejecutando metodo obtenerListaCourier");
+		
 		return responseObtenerListaCourier;
 		
 	}
 	
 	public ResponseInformarEntregaCourier informarEntregaCourier(RequestInformarEntregaCourier requestInformarEntregaCourier){
+		logger.info("INI Service: Ejecutando metodo informarEntregaCourier");
+		System.out.println("INI Service: Ejecutando metodo informarEntregaCourier");
+		
 		ResponseInformarEntregaCourier responseInformarEntregaCourier = new ResponseInformarEntregaCourier();
 		List<Delivery> deliveries = deliveryDao.informarEntregaCourier(requestInformarEntregaCourier);
 		Delivery delivery = null;
@@ -287,10 +338,17 @@ public class DeliveryServiceImp implements DeliveryService {
 		tx.setCodigo(CODIGO_TRX_CORRECTO);
 		tx.setMensaje(MENSAJE_TRX_CORRECTO);
 		responseInformarEntregaCourier.setTx(tx);
+		
+		System.out.println("FIN Service: Ejecutando metodo informarEntregaCourier");
+		logger.info("FIN Service: Ejecutando metodo informarEntregaCourier");
+		
 		return responseInformarEntregaCourier;
 	}
 	
 	public ResponseInformarActivacionBBVA informarActivacionBBVA(RequestInformarActivacionBBVA requestInformarActivacionBBVA){
+		logger.info("INI Service: Ejecutando metodo informarActivacionBBVA");
+		System.out.println("INI Service: Ejecutando metodo informarActivacionBBVA");
+		
 		ResponseInformarActivacionBBVA responseInformarActivacionBBVA = new ResponseInformarActivacionBBVA();
 		List<Delivery> deliveries = deliveryDao.informarActivacionBBVA(requestInformarActivacionBBVA);
 		Delivery delivery = null;
@@ -321,10 +379,18 @@ public class DeliveryServiceImp implements DeliveryService {
 		tx.setCodigo(CODIGO_TRX_CORRECTO);
 		tx.setMensaje(MENSAJE_TRX_CORRECTO);
 		responseInformarActivacionBBVA.setTx(tx);
+		
+		System.out.println("FIN Service: Ejecutando metodo informarActivacionBBVA");
+		logger.info("FIN Service: Ejecutando metodo informarActivacionBBVA");
+		
 		return responseInformarActivacionBBVA;
 	}
 	
 	public ResponseTransferirArchivo transferirArchivo(RequestTransferirArchivo requestTransferirArchivo){
+		
+		logger.info("INI Service: Ejecutando metodo transferirArchivo");
+		System.out.println("INI Service: Ejecutando metodo transferirArchivo");
+		
 		ResponseTransferirArchivo responseTransferirArchivo = new ResponseTransferirArchivo();
 		Tx tx = new Tx();
 		tx.setCodigo(CODIGO_TRX_CORRECTO);
@@ -337,11 +403,18 @@ public class DeliveryServiceImp implements DeliveryService {
 		}
 		responseTransferirArchivo.setArchivoGenerado(archivoGenerado);
 		responseTransferirArchivo.setTx(tx);
+		
+		System.out.println("FIN Service: Ejecutando metodo transferirArchivo");
+		logger.info("FIN Service: Ejecutando metodo transferirArchivo");
+		
 		return responseTransferirArchivo;
 	}
 	
 	public ArchivoPDF getArchivoPDF(ArchivoPDF archivoPDF, String ruta) throws Exception{
-		byte[] getArchivoPDFxIdePaqImp13mtemp = null;
+		logger.info("INI Service: Ejecutando metodo getArchivoPDF");
+		System.out.println("INI Service: Ejecutando metodo getArchivoPDF");
+		
+		byte[] getArchivoPDF = null;
 		String file = null;
 		File f = null;
 		String nombreArchivo = "";
@@ -356,15 +429,19 @@ public class DeliveryServiceImp implements DeliveryService {
 			file = ruta + "temp" + "/" + nombreArchivo;
 			
 			if(pdf.getArchivo() != null){
-				getArchivoPDFxIdePaqImp13mtemp = pdf.getArchivo().getBytes();
-				if(getArchivoPDFxIdePaqImp13mtemp == null || getArchivoPDFxIdePaqImp13mtemp.length == 0){
+				getArchivoPDF = pdf.getArchivo().getBytes();
+				if(getArchivoPDF == null || getArchivoPDF.length == 0){
 					logger.debug("No Se obtuvo Array de Bytes del PDF");
 					pdf.setArchivo(file);
 					pdf.setCodigo("1");
 					pdf.setMensaje("No tiene pdf");
+					
+					System.out.println("FIN Service: Ejecutando metodo getArchivoPDF");
+					logger.info("FIN Service: Ejecutando metodo getArchivoPDF");
+					
 					return pdf;
 				}else{
-					byte[] bfo = Base64.decodeBase64(getArchivoPDFxIdePaqImp13mtemp);
+					byte[] bfo = Base64.decodeBase64(getArchivoPDF);
 					f = new File(file);
 	
 					FileOutputStream fos = new FileOutputStream(f);
@@ -381,6 +458,10 @@ public class DeliveryServiceImp implements DeliveryService {
 				pdf.setArchivo(file);
 				pdf.setCodigo("1");
 				pdf.setMensaje("No tiene pdf");
+				
+				System.out.println("FIN Service: Ejecutando metodo getArchivoPDF");
+				logger.info("FIN Service: Ejecutando metodo getArchivoPDF");
+				
 				return pdf;
 			}
 		}else{
@@ -389,18 +470,30 @@ public class DeliveryServiceImp implements DeliveryService {
 			pdf.setMensaje("El código de delivery no existe");
 		}
 		
+		System.out.println("FIN Service: Ejecutando metodo getArchivoPDF");
+		logger.info("FIN Service: Ejecutando metodo getArchivoPDF");
+		
 		return pdf;
 	}
 	
 	public Usuario addUsuario(Usuario usuario) throws Exception{
+		logger.info("INI Service: Ejecutando metodo addUsuario");
+		System.out.println("INI Service: Ejecutando metodo addUsuario");
+		
 		usuario.setContrasena(this.encriptar(KEY, IV, usuario.getContrasena()));
 		usuario.setIdpestado(1);
 		usuario.setUsuario("DELIVERY_BBVA");
+		
+		System.out.println("FIN Service: Ejecutando metodo addUsuario");
+		logger.info("FIN Service: Ejecutando metodo addUsuario");
+		
 		return deliveryDao.obtUsuario(deliveryDao.addUsuario(usuario).getIdeusuario());
 	}
 	
 	public void envioCorreo(String subject, String body, String adjunto, String para, String copia, String copiaoculta){
-
+		logger.info("INI Service: Ejecutando metodo envioCorreo");
+		System.out.println("INI Service: Ejecutando metodo envioCorreo");
+		
 		String userAuth = null;
 		String passAuth = null;
 		String host = null;
@@ -431,6 +524,9 @@ public class DeliveryServiceImp implements DeliveryService {
 		this.sendGeneral(from, to, cc, cco, subjectMail,
 				bodyMail, listAdjunto, null, null, null, userAuth,
 				passAuth, host);	
+		
+		System.out.println("FIN Service: Ejecutando metodo envioCorreo");
+		logger.info("FIN Service: Ejecutando metodo envioCorreo");
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -439,6 +535,9 @@ public class DeliveryServiceImp implements DeliveryService {
 								   String acuserecibo,String urlAcuse,//Acuse de recibo 1=SI,0 ó null=NO
 								   String userAuth,String passAuth,String host) //parametros de autentificacion
 	{
+		logger.info("INI Service: Ejecutando metodo sendGeneral");
+		System.out.println("INI Service: Ejecutando metodo sendGeneral");
+		
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", host);
 		properties.setProperty("mail.smtp.user", userAuth);
@@ -550,7 +649,10 @@ public class DeliveryServiceImp implements DeliveryService {
 		catch (MessagingException mex) {
 		      	mex.printStackTrace();
 		    	throw new RuntimeException("" + mex, mex);
-	      }
+	    }
+		
+		System.out.println("FIN Service: Ejecutando metodo sendGeneral");
+		logger.info("FIN Service: Ejecutando metodo sendGeneral");
 	}
 	
 }

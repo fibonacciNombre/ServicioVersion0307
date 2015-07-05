@@ -34,6 +34,10 @@ import com.rimac.sas.utiles.comunes.JdbcHelper;
 
 
 
+/**
+ * @author dingan
+ *
+ */
 @Repository("deliveryDao")
 public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	
@@ -82,8 +86,8 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	//trae un usuario
 	@SuppressWarnings("unchecked")
 	public Usuario getUsuario(Usuario usuario){
-		logger.info("INI: Ejecutando metodo getUsuario");
-		System.out.println("INI: Ejecutando metodo getUsuario");
+		logger.debug("INI DAO: Ejecutando metodo getUsuario");
+		System.out.println("INI DAO: Ejecutando metodo getUsuario");
 		List<Usuario> usr = null;
 		MapSqlParameterSource in = null;
 		
@@ -101,8 +105,8 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		usr = (List<Usuario>) out.get("a_cursor");
 		
-		System.out.println("FIN: Ejecutando metodo getUsuario");
-		logger.info("FIN: Ejecutando metodo getUsuario");
+		System.out.println("FIN DAO: Ejecutando metodo getUsuario");
+		logger.debug("FIN DAO: Ejecutando metodo getUsuario");
 		
 		return usr.get(0);
 
@@ -110,8 +114,8 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Delivery> lstDelivery(Delivery param){
-		logger.info("INI: Ejecutando metodo lstDelivery");
-		System.out.println("INI: Ejecutando metodo lstDelivery");
+		logger.debug("INI DAO: Ejecutando metodo lstDelivery");
+		System.out.println("INI DAO: Ejecutando metodo lstDelivery");
 		List<Delivery> lista = null;
 		
 		MapSqlParameterSource in = null;
@@ -131,15 +135,15 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		out = call.execute(in);
 		
 		lista = (List<Delivery>) out.get("a_cursor");
-		System.out.println("FIN: Ejecutando metodo lstDelivery");
-		logger.info("FIN: Ejecutando metodo lstDelivery");
+		System.out.println("FIN DAO: Ejecutando metodo lstDelivery");
+		logger.debug("FIN DAO: Ejecutando metodo lstDelivery");
 		return lista;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Courier> obtenerListaCourier(){
-		logger.info("INI: Ejecutando metodo obtenerListaCourier");
-		System.out.println("INI: Ejecutando metodo obtenerListaCourier");
+		logger.debug("INI DAO: Ejecutando metodo obtenerListaCourier");
+		System.out.println("INI DAO: Ejecutando metodo obtenerListaCourier");
 		List<Courier> lista = null;
 		
 		MapSqlParameterSource in = null;
@@ -159,14 +163,14 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		out = call.execute(in);
 		
 		lista = (List<Courier>) out.get("a_cursor");
-		System.out.println("FIN: Ejecutando metodo obtenerListaCourier");
-		logger.info("FIN: Ejecutando metodo obtenerListaCourier");
+		System.out.println("FIN DAO: Ejecutando metodo obtenerListaCourier");
+		logger.debug("FIN DAO: Ejecutando metodo obtenerListaCourier");
 		return lista;
 	}
 	
 	public Usuario addUsuario(Usuario usuario){
-		logger.info("INI: Ejecutando metodo addUsuario");
-		System.out.println("INI: Ejecutando metodo addUsuario");
+		logger.debug("INI DAO: Ejecutando metodo addUsuario");
+		System.out.println("INI DAO: Ejecutando metodo addUsuario");
 		Usuario usr = new Usuario();
 		MapSqlParameterSource in = null;
 		
@@ -190,16 +194,16 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		out = call.execute(in);
 		
 		usr.setIdeusuario(Integer.parseInt(((BigDecimal) out.get("a_idusuario")).toString()));
-		System.out.println("FIN: Ejecutando metodo addUsuario");
-		logger.info("FIN: Ejecutando metodo addUsuario");
+		System.out.println("FIN DAO: Ejecutando metodo addUsuario");
+		logger.debug("FIN DAO: Ejecutando metodo addUsuario");
 		
 		return usr;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Usuario obtUsuario(Integer id){
-		logger.info("INI: Ejecutando metodo obtUsuario");
-		System.out.println("INI: Ejecutando metodo obtUsuario");
+		logger.debug("INI DAO: Ejecutando metodo obtUsuario");
+		System.out.println("INI DAO: Ejecutando metodo obtUsuario");
 		List<Usuario> usr = null;
 		MapSqlParameterSource in = null;
 		
@@ -217,16 +221,16 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		usr = (List<Usuario>) out.get("a_cursor");
 		
-		System.out.println("FIN: Ejecutando metodo obtUsuario");
-		logger.info("FIN: Ejecutando metodo obtUsuario");
+		System.out.println("FIN DAO: Ejecutando metodo obtUsuario");
+		logger.debug("FIN DAO: Ejecutando metodo obtUsuario");
 		
 		return usr.get(0);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<VisitasUsuario> getVisitasUsuario( RequestGetVisitasUsuario requestGetVisitasUsuario, String fecha){
-		logger.info("INI: Ejecutando metodo getVisitasUsuario");
-		System.out.println("INI: Ejecutando metodo getVisitasUsuario");
+		logger.debug("INI DAO: Ejecutando metodo getVisitasUsuario");
+		System.out.println("INI DAO: Ejecutando metodo getVisitasUsuario");
 		List<VisitasUsuario> visitasUsuarios = null;
 		MapSqlParameterSource in = null;
 		
@@ -245,16 +249,16 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		visitasUsuarios = (List<VisitasUsuario>) out.get("a_cursor");
 		
-		logger.info("FIN: Ejecutando metodo getVisitasUsuario");
-		System.out.println("FIN: Ejecutando metodo getVisitasUsuario");
+		logger.debug("FIN DAO: Ejecutando metodo getVisitasUsuario");
+		System.out.println("FIN DAO: Ejecutando metodo getVisitasUsuario");
 		
 		return visitasUsuarios;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<ValidarCourier> validarDNICourier( RequestValidarCourier requestValidarCourier){
-		logger.info("INI: Ejecutando metodo validarDNICourier");
-		System.out.println("INI: Ejecutando metodo validarDNICourier");
+		logger.debug("INI DAO: Ejecutando metodo validarDNICourier");
+		System.out.println("INI DAO: Ejecutando metodo validarDNICourier");
 		List<ValidarCourier> validarCourier = null;
 		MapSqlParameterSource in = null;
 		
@@ -272,8 +276,8 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		validarCourier = (List<ValidarCourier>) out.get("a_cursor");
 		
-		System.out.println("FIN: Ejecutando metodo validarDNICourier");
-		logger.info("FIN: Ejecutando metodo validarDNICourier");
+		System.out.println("FIN DAO: Ejecutando metodo validarDNICourier");
+		logger.debug("FIN DAO: Ejecutando metodo validarDNICourier");
 		
 		return validarCourier;
 	}
@@ -281,8 +285,8 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	
 	@SuppressWarnings("unchecked")
 	public RequestChangeEstadoRegistro changeEstadoRegistro( RequestChangeEstadoRegistro requestChangeEstadoRegistro){
-		logger.info("INI: Ejecutando metodo changeEstadoRegistro");
-		System.out.println("INI: Ejecutando metodo changeEstadoRegistro");
+		logger.debug("INI DAO: Ejecutando metodo changeEstadoRegistro");
+		System.out.println("INI DAO: Ejecutando metodo changeEstadoRegistro");
 		List<RequestChangeEstadoRegistro> rcer = null;
 		MapSqlParameterSource in = null;
 		
@@ -308,16 +312,16 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		requestChangeEstadoRegistro.setCodigo(rcer.get(0).getCodigo());
 		requestChangeEstadoRegistro.setMensaje(rcer.get(0).getMensaje());
 		
-		System.out.println("FIN: Ejecutando metodo changeEstadoRegistro");
-		logger.info("FIN: Ejecutando metodo changeEstadoRegistro");
+		System.out.println("FIN DAO: Ejecutando metodo changeEstadoRegistro");
+		logger.debug("FIN DAO: Ejecutando metodo changeEstadoRegistro");
 		
 		return requestChangeEstadoRegistro;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Delivery> informarEntregaCourier( RequestInformarEntregaCourier requestInformarEntregaCourier){
-		logger.info("INI: Ejecutando metodo informarEntregaCourier");
-		System.out.println("INI: Ejecutando metodo informarEntregaCourier");
+		logger.debug("INI DAO: Ejecutando metodo informarEntregaCourier");
+		System.out.println("INI DAO: Ejecutando metodo informarEntregaCourier");
 		List<Delivery> deliveries = null;
 		MapSqlParameterSource in = null;
 		
@@ -336,16 +340,16 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		deliveries = (List<Delivery>) out.get("a_cursor");
 		
-		System.out.println("FIN: Ejecutando metodo informarEntregaCourier");
-		logger.info("FIN: Ejecutando metodo informarEntregaCourier");
+		System.out.println("FIN DAO: Ejecutando metodo informarEntregaCourier");
+		logger.debug("FIN DAO: Ejecutando metodo informarEntregaCourier");
 		
 		return deliveries;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Delivery> informarActivacionBBVA( RequestInformarActivacionBBVA requestInformarActivacionBBVA){
-		logger.info("INI: Ejecutando metodo informarActivacionBBVA");
-		System.out.println("INI: Ejecutando metodo informarActivacionBBVA");
+		logger.debug("INI DAO: Ejecutando metodo informarActivacionBBVA");
+		System.out.println("INI DAO: Ejecutando metodo informarActivacionBBVA");
 		List<Delivery> deliveries = null;
 		MapSqlParameterSource in = null;
 		
@@ -364,16 +368,16 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		deliveries = (List<Delivery>) out.get("a_cursor");
 		
-		System.out.println("FIN: Ejecutando metodo informarActivacionBBVA");
-		logger.info("FIN: Ejecutando metodo informarActivacionBBVA");
+		System.out.println("FIN DAO: Ejecutando metodo informarActivacionBBVA");
+		logger.debug("FIN DAO: Ejecutando metodo informarActivacionBBVA");
 		
 		return deliveries;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public ArchivoGenerado transferirArchivo( RequestTransferirArchivo requestTransferirArchivo){
-		logger.info("INI: Ejecutando metodo transferirArchivo");
-		System.out.println("INI: Ejecutando metodo transferirArchivo");
+		logger.debug("INI DAO: Ejecutando metodo transferirArchivo");
+		System.out.println("INI DAO: Ejecutando metodo transferirArchivo");
 		List<ArchivoGenerado> rcer = null;
 		MapSqlParameterSource in = null;
 		
@@ -394,16 +398,16 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		rcer = (List<ArchivoGenerado>) out.get("a_cursor");
 		
-		System.out.println("FIN: Ejecutando metodo transferirArchivo");
-		logger.info("FIN: Ejecutando metodo transferirArchivo");
+		System.out.println("FIN DAO: Ejecutando metodo transferirArchivo");
+		logger.debug("FIN DAO: Ejecutando metodo transferirArchivo");
 		
 		return rcer.get(0);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<ArchivoPDF> getArchivoPDF( ArchivoPDF archivoPDF){
-		logger.info("INI: Ejecutando metodo getArchivoPDF");
-		System.out.println("INI: Ejecutando metodo getArchivoPDF");
+		logger.debug("INI DAO: Ejecutando metodo getArchivoPDF");
+		System.out.println("INI DAO: Ejecutando metodo getArchivoPDF");
 		List<ArchivoPDF> rcer = null;
 		MapSqlParameterSource in = null;
 		
@@ -424,8 +428,8 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		
 		rcer = (List<ArchivoPDF>) out.get("a_cursor");
 		
-		System.out.println("FIN: Ejecutando metodo getArchivoPDF");
-		logger.info("FIN: Ejecutando metodo getArchivoPDF");
+		System.out.println("FIN DAO: Ejecutando metodo getArchivoPDF");
+		logger.debug("FIN DAO: Ejecutando metodo getArchivoPDF");
 		
 		return rcer;
 	}

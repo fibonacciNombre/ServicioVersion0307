@@ -5,6 +5,11 @@ import java.util.Map;
 
 import commons.mapper.ResourceManager;
 
+
+/**
+ * @author dingan
+ *
+ */
 public class Delivery {
 	
 	private BigDecimal iddelivery;
