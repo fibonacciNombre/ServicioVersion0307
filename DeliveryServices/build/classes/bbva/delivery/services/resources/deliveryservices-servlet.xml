@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util-3.0.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						http://www.springframework.org/schema/jee 
+						http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+						http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+						http://www.springframework.org/schema/lang 
+						http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
+
+<!-- 	<bean id="methodNameResolver" -->
+<!-- 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"> -->
+<!-- 		<property name="paramName"> -->
+<!-- 			<value>method</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
+	<context:component-scan base-package="
+        bbva.delivery.services.controller" />
+        
+    <context:component-scan base-package="
+        bbva.delivery.services.secure" />
+
+	<mvc:annotation-driven />
+	<aop:aspectj-autoproxy />
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+<!-- 	<bean id="urlMapping" -->
+<!-- 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="/delivery.do">deliveryController</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="deliveryController" 	class="bbva.delivery.services.controller.DeliveryController"> -->
+<!-- 		<property name="methodNameResolver" ref="methodNameResolver" /> -->
+<!-- 	</bean> -->
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+<!-- 	<aop:aspectj-autoproxy /> -->
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	</bean>
+
+	<bean id="methodHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- ASPECTS DEFINITIONS -->
+	
+	 <bean id="securityAspect" class="bbva.delivery.services.aspecto.Secure" />
+	 
+	<bean id="auditaController" class="bbva.delivery.services.aspecto.AuditaController" />
+
+<!-- 	<bean id="portalwebconfig" class="bbva.delivery.services.util.DeliveryProperties"></bean> -->
+	
+</beans>
