@@ -28,61 +28,42 @@ public class ComunServiceImp implements ComunService {
 
 	@Autowired private ComunDao comunDao;
 	
-	/*
-	 * (non-Javadoc)
-	 * @see rimac.portalweb.dao.ComunDaoImp#obtenerConstante(String)
-	 */	
+
 	public Constante obtenerConstante(String ideConstante) {
 		return comunDao.obtenerConstante(ideConstante);
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see rimac.portalweb.dao.ComunDaoImp#obtenerParametro(rimac.portalweb.bean.Parametro)
-	 */	
+
 	public Parametro obtenerParametro(Parametro parametro){
 		return comunDao.obtenerParametro(parametro);
 	}
 
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.service.ComunService#listarParametro(rimac.portalweb.comun.bean.Parametro)
-	 */
+
 	public List<Parametro> listarParametro(Parametro parametro) {
 		return comunDao.listarParametro(parametro);
 	}
 
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.service.ComunService#obtenerListaParametros(rimac.portalweb.comun.bean.Parametro)
-	 */
+
 	
 	public void obtenerListaParametros(Parametro param) {
 		comunDao.obtenerListaParametros(param);		
 	}
 
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.service.ComunService#obtenerEstadoPlan(java.math.BigDecimal)
-	 */
 	public String obtenerEstadoPlan(BigDecimal ideplan) {
 		return comunDao.obtenerEstadoPlan(ideplan);
 	}
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.service.ComunService#obtenerSinMonedaPlan(java.math.BigDecimal)
-	 */
+
 	public String obtenerSinMonedaPlan(BigDecimal ideplan){
 		return comunDao.obtenerSinMonedaPlan(ideplan);
 	}
 	
-    /* (non-Javadoc)
-     * @see rimac.portalweb.comun.service.ComunService#cboAtributoHijoDeclarar(rimac.portalweb.comun.bean.Atributo)
-     */
+
 	public List<Valor> listarValoresxAtributoHijo(Atributo param) {
 		return comunDao.listarValoresxAtributoHijo(param);
 	}
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.service.ComunService#listarValoresxAtributo(rimac.portalweb.comun.bean.Atributo)
-	 */
+
 	public List<Valor> listarValoresxAtributo(Atributo param) {
 		return comunDao.listarValoresxAtributo(param);
 	}
@@ -110,9 +91,7 @@ public class ComunServiceImp implements ComunService {
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.clinicas.service.ClinicasService#cboProvincia(rimac.portalweb.clinicas.bean.CboDepartamento)
-	 */
+
 	public List<CboProvincia> cboProvincia(CboDepartamento param){
 		List<CboProvincia> lstprovincias = new ArrayList<CboProvincia>();
 		List<CboProvincia> provTemp =comunDao.cboProvincia(param);
@@ -126,9 +105,7 @@ public class ComunServiceImp implements ComunService {
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.clinicas.service.ClinicasService#cboDistrito(rimac.portalweb.clinicas.bean.CboProvincia)
-	 */
+
 	public List<CboDistrito> cboDistrito(CboProvincia param){
 		List<CboDistrito> lstdistrito = new ArrayList<CboDistrito>();
 		List<CboDistrito> distTemp = comunDao.cboDistrito(param);

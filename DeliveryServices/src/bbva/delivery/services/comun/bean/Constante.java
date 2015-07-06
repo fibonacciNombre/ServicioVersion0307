@@ -1,18 +1,7 @@
 package bbva.delivery.services.comun.bean;
 
-import java.io.Serializable;
-import java.util.Map;
+public class Constante  {
 
-import commons.mapper.ResourceManager;
-
-/**
- * Contiene los datos de las contantes definidas en la DB
- * 
- * @author Rimac Seguros
- */
-public class Constante implements Serializable {
-	
-	private static final long serialVersionUID = -4437336263944238580L;
 	
 	private String ideConstante;
 	private String dscConstante;
@@ -23,9 +12,6 @@ public class Constante implements Serializable {
 	
 	public Constante() {}
 	
-	public Constante(Map<?,?> params) throws Exception {
-		ResourceManager.populateDtoFromMap(this, params);
-	}
 	
 	public String getValorClob() {
 		return valorClob;

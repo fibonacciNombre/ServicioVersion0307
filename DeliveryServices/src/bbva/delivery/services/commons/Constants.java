@@ -2,7 +2,7 @@ package bbva.delivery.services.commons;
 
 public class Constants {
 
-	public static final String RUTA_ARCH_DEFAULT		 				= "RUTA_ARCH_CONF" ; //La constante se encuentra originalmente en RIMAC_SEG_Lib.jar
+	public static final String RUTA_ARCH_DEFAULT		 				= "RUTA_ARCH_CONF" ; 
 	
 	public static final String FILE_CONFIGURACION_DELIVERY_SERVICES		= "DELIVERYSERVICES";
 
@@ -217,7 +217,7 @@ public class Constants {
 	public static final Integer MAX_INTENTO_BLOQ			= 5;
 	
 	//Constantes Core Busqueda Polizas
-	public static final Integer RIMAC_SALUD_CORE 			= 1;
+	
 	public static final Integer REPLICA_CORE 	 			= 2;
 	public static final Integer AX_CORE 					= 3;
 	public static final Integer SAS_CORE 					= 4;

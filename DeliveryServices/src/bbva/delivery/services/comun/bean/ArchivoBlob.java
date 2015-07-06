@@ -1,7 +1,4 @@
-/**
- * Created on 14/03/2012
- * Copyright (c) Rimac Seguros S.A.
- */
+
 package bbva.delivery.services.comun.bean;
 
 import java.io.Serializable;
@@ -9,12 +6,7 @@ import java.util.Map;
 
 import commons.mapper.ResourceManager;
 
-/**
- * M�todo que contiene los datos de relacionados a un archivo que se
- * guarda en base de datos
- * 
- * @author Rimac Seguros - Hilmer Aliaga
- */
+
 public class ArchivoBlob implements Serializable {
 
 	private static final long serialVersionUID = 3633897110503568750L;

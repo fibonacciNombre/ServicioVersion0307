@@ -29,8 +29,9 @@ import bbva.delivery.services.comun.bean.ListaParametroCursor;
 import bbva.delivery.services.comun.bean.Parametro;
 import bbva.delivery.services.comun.bean.Valor;
 import bbva.delivery.services.comun.dao.ComunDao;
+import bbva.delivery.services.util.JdbcHelper;
 
-import com.rimac.sas.utiles.comunes.JdbcHelper;
+
 
 @Repository("comunDao")
 public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
@@ -45,11 +46,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 	private String PQ_LISTAR_TABLAS_PROD  	= resources.getString(ConstantsProperties.PQ_PRODUCTO_LST_TABLAS_PROD);
 	private String OWNER_ESQUEMA_TERCERO 	= resources.getString(ConstantsProperties.OWNER_ESQUEMA_TERCERO);
 	private String PQ_TERCERO_PUNTOCONTACTO = resources.getString(ConstantsProperties.PQ_TERCERO_PUNTOCONTACTO);
-	/*
-	 * (non-Javadoc)
-	 * @see rimac.portalweb.dao.ComunDaoImp#
-	 * 		obtenerConstante(String)
-	 */
+
 	public Constante obtenerConstante(String ideConstante) {
 		logger.info("Ejecutando m�todo: obtenerConstante");
 		SimpleJdbcCall call = null;
@@ -70,11 +67,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 		return (lstConstantes!=null && lstConstantes.size()>0)?lstConstantes.get(0):null;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see rimac.portalweb.dao.ComunDaoImp#
-	 * 		obtenerParametro(rimac.portalweb.bean.Parametro)
-	 */	
+
 	public Parametro obtenerParametro(Parametro parametro) {
 		System.out.println("***************************parametro**********************");
 //		System.out.println(ToStringBuilder.reflectionToString(parametro,ToStringStyle.MULTI_LINE_STYLE));
@@ -109,9 +102,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 		return (lista != null && lista.size() > 0)? lista.get(0) : new Parametro();
 	}
 
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.dao.ComunDao#listarParametro(rimac.portalweb.comun.bean.Parametro)
-	 */
+
 	public List<Parametro> listarParametro(Parametro parametro) {
 		logger.info("Ejecutando m�todo: obtenerParametro");
 		SimpleJdbcCall call = null;
@@ -137,9 +128,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 		return JdbcHelper.getListResultSet(out, "v_cursor", Parametro.class);
 	}
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.dao.ComunDao#obtenerListaParametros(rimac.portalweb.comun.bean.Parametro)
-	 */
+
 	@SuppressWarnings("unchecked")
 	public void obtenerListaParametros(Parametro param) {
 		
@@ -165,9 +154,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 		param.setCursor((List<ListaParametroCursor>) out.get("a_cursor"));
 	}
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.dao.ComunDao#obtenerEstadoPlan(java.math.BigDecimal)
-	 */
+
 	public String obtenerEstadoPlan(BigDecimal ideplan) {
 		logger.debug("Ejecutando m�todo obtenerEstadoPlan");
 		String resultado = null;
@@ -189,9 +176,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.dao.ComunDao#obtenerSinMonedaPlan(java.math.BigDecimal)
-	 */
+
 	public String obtenerSinMonedaPlan(BigDecimal ideplan) {
 		logger.debug("Ejecutando m�todo obtenerSinMonedaPlan");
 		String resultado = null;
@@ -212,9 +197,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 		return resultado;
     }
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.dao.ComunDao#listarValoresxAtributoHijo(rimac.portalweb.comun.bean.Atributo)
-	 */
+
 	public List<Valor> listarValoresxAtributoHijo(Atributo atributo){
 		logger.info("Ejecutando m�todo: listarValoresxAtributoHijo");
 		SimpleJdbcCall call = null;
@@ -239,9 +222,7 @@ public class ComunDaoImp extends JdbcDaoBase implements ComunDao {
 		return JdbcHelper.getListResultSet(out, "c_cursor", Valor.class);	
 	}
 	
-	/* (non-Javadoc)
-	 * @see rimac.portalweb.comun.dao.ComunDao#listarValoresxAtributo(rimac.portalweb.comun.bean.Atributo)
-	 */
+
 	public List<Valor> listarValoresxAtributo(Atributo atributo){
 		logger.info("Ejecutando m�todo: listarValoresxAtributo");
 		SimpleJdbcCall call = null;

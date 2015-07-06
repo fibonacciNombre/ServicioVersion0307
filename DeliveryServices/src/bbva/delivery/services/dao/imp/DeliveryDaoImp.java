@@ -29,8 +29,9 @@ import bbva.delivery.services.bean.ValidarCourier;
 import bbva.delivery.services.bean.VisitasUsuario;
 import bbva.delivery.services.comun.dao.imp.JdbcDaoBase;
 import bbva.delivery.services.dao.DeliveryDao;
+import bbva.delivery.services.util.JdbcHelper;
 
-import com.rimac.sas.utiles.comunes.JdbcHelper;
+
 
 
 
@@ -41,8 +42,8 @@ import com.rimac.sas.utiles.comunes.JdbcHelper;
 @Repository("deliveryDao")
 public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	
-	private final static String ESQUEMA_BBVA = "BBVADESA";
-	//private final static String ESQUEMA_BBVA = "BBVA";
+	//private final static String ESQUEMA_BBVA = "BBVADESA";
+	private final static String ESQUEMA_BBVA = "BBVA";
 	private final static String PAQUETE_SERVICIOS = "PQ_DEL_SERVICIOS";
 	private final static String PAQUETE_COURIER = "pq_del_courier";
 	private final static String PAQUETE_USUARIO = "pq_del_usuario";

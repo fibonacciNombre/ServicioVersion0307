@@ -50,7 +50,7 @@ public class CommonsHelper {
 			if (mensaje.indexOf("ORA")>0) {
 				detalleError = Utils.getMessageORA(mensaje);
 			} else if ((t instanceof ValidationException) || (t instanceof
-					com.rimac.sas.excepciones.ValidationException)) {
+					Exception)) {
 				detalleError = formatearMensajeErrorJson(
 						ConstantsProperties.ORIGEN_ERROR_VALIDACION, t.getMessage(), "");
 			} else {
