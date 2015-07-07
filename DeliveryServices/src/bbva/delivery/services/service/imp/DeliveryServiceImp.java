@@ -455,7 +455,7 @@ public class DeliveryServiceImp implements DeliveryService {
 					pdf.setMensaje("Exito");
 				}
 			}else{
-				pdf.setArchivo(file);
+				pdf.setArchivo(null);
 				pdf.setCodigo("1");
 				pdf.setMensaje("No tiene pdf");
 				
