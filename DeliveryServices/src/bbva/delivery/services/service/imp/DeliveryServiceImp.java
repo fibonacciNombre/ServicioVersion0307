@@ -47,6 +47,7 @@ import bbva.delivery.services.bean.EmbeddedImages;
 import bbva.delivery.services.bean.EstadoRegistro;
 import bbva.delivery.services.bean.InformarActivacionBBVA;
 import bbva.delivery.services.bean.InformarEntregaCourier;
+import bbva.delivery.services.bean.Parametro;
 import bbva.delivery.services.bean.RequestChangeEstadoRegistro;
 import bbva.delivery.services.bean.RequestGetVisitasUsuario;
 import bbva.delivery.services.bean.RequestInformarActivacionBBVA;
@@ -84,7 +85,7 @@ public class DeliveryServiceImp implements DeliveryService {
     
     //Transacciones
     private final static String CODIGO_TRX_CORRECTO = "0"; 
-    private final static String MENSAJE_TRX_CORRECTO = "TransacciÃ³n correcta";
+    private final static String MENSAJE_TRX_CORRECTO = "Transacción correcta";
     
     //Validar DNI
     private final static String CODIGO_USR_NOEXISTE= "002"; 
@@ -100,18 +101,10 @@ public class DeliveryServiceImp implements DeliveryService {
     private final static String CODIGO_CORREO_CORRECTO = "0"; 
     private final static String MENSAJE_CORREO_CORRECTO = "Correo Enviado con Exito"; 
     private final static String CODIGO_CORREO_ERROR = "1"; 
-    private final static String MENSAJE_CORREO_ERROR = "No se enviÃ³ el correo, no existe entrega";
-    private final static String SUBJECT_ENTREGA = "InformarEntregaCourier";
-    private final static String SUBJECT_ACTIVACION = "InformarActivacionBBVA";
-    private final static String CORREO_BBVA = "soportedeliverybbva@gmail.com"; 
-    private final static String CC = "soportedeliverybbva@gmail.com"; 
-    private final static String CCO = "david.inga.81@gmail.com"; 
+    private final static String MENSAJE_CORREO_ERROR = "No se envió el correo, no existe entrega";
     
-    //Host Correo
-    private final static String FROM = "soportedeliverybbva@gmail.com"; 
-    private final static String USERAUTH = "soportedeliverybbva@gmail.com"; 
-    private final static String PASSAUTH = "bbva2015";
-    private final static String HOST = "smtp.gmail.com"; 
+    //Parametros
+    private final static String DELSERVICIOS_CORREO = "DELSERVICIOS_CORREO"; 
 
 	@Autowired
 	private DeliveryDao deliveryDao;
@@ -310,17 +303,39 @@ public class DeliveryServiceImp implements DeliveryService {
 		List<Delivery> deliveries = deliveryDao.informarEntregaCourier(requestInformarEntregaCourier);
 		Delivery delivery = null;
 		InformarEntregaCourier  j = null;
-		String body = "";
+		String bodyEntrega = "";
+		String subjectEntrega = "";
+		String cc = "";
+		String cco = "";
+		
 		if(!deliveries.isEmpty()){
 			delivery = deliveries.get(0);
 			j = new InformarEntregaCourier();
-
-			body = "Se envï¿½a el informe de Entrega Courier, lo envia: "+delivery.getNombretercero()+"<br>"
-					+ "  Codigo de Entrega: "+delivery.getIddelivery().toString()+"<br>"
-					+ "  Estado: "+ requestInformarEntregaCourier.getEstado()+"<br>"
-					+ "  Observaciones : "+ requestInformarEntregaCourier.getObservaciones()+"<br>"
-					+ "  Fecha y Hora : "+ requestInformarEntregaCourier.getFechaHora();			
-			this.envioCorreo(SUBJECT_ENTREGA, body, null, delivery.getCorreocourier(), CC, CCO);
+			
+			List<Parametro> parametros= deliveryDao.getParametros(DELSERVICIOS_CORREO);
+			
+			for(Parametro parametro : parametros ){
+				if("BODY_ENTREGA".equals(parametro.getCodigoc())){
+					bodyEntrega = parametro.getDescripcion();
+				}
+				if("SUBJECT_ENTREGA".equals(parametro.getCodigoc())){
+					subjectEntrega = parametro.getDescripcion();
+				}
+				if("CC".equals(parametro.getCodigoc())){
+					cc = parametro.getDescripcion();
+				}
+				if("CCO".equals(parametro.getCodigoc())){
+					cco = parametro.getDescripcion();
+				}
+			}
+			
+			bodyEntrega = bodyEntrega.replace("{TERCERO}", delivery.getNombretercero());
+			bodyEntrega = bodyEntrega.replace("{CODIGOENTREGA}", delivery.getIddelivery().toString());
+			bodyEntrega = bodyEntrega.replace("{ESTADO}", requestInformarEntregaCourier.getEstado());
+			bodyEntrega = bodyEntrega.replace("{OBSERVACIONES}", requestInformarEntregaCourier.getObservaciones());
+			bodyEntrega = bodyEntrega.replace("{FECHAHORA}", requestInformarEntregaCourier.getFechaHora());
+					
+			this.envioCorreo(subjectEntrega, bodyEntrega, null, delivery.getCorreocourier(), cc, cco);
 			j.setCodigo(CODIGO_CORREO_CORRECTO);
 			j.setMensaje(MENSAJE_CORREO_CORRECTO);
 			responseInformarEntregaCourier.setInformarEntregaCourier(j);
@@ -350,18 +365,41 @@ public class DeliveryServiceImp implements DeliveryService {
 		List<Delivery> deliveries = deliveryDao.informarActivacionBBVA(requestInformarActivacionBBVA);
 		Delivery delivery = null;
 		InformarActivacionBBVA  j = null;
-		String body = "";
+		String bodyActivacion = "";
+		String subjActivacion = "";
+		String cc = "";
+		String cco = "";
+		String correo_bbva = "";
+		
 		if(!deliveries.isEmpty()){
 			delivery = deliveries.get(0);
 			j = new InformarActivacionBBVA();
 			
-			body = "Se envÃ­a la Activacion de Tarjeta, del cliente: "+delivery.getNombrescli()+"<br>"
-					+ "  Codigo de Entrega: "+delivery.getIddelivery().toString()+"<br>"
-					+ "  Estado: Tarjeta Activada<br>"
-				//	+ "  Observaciones : "+ requestInformarEntregaCourier.getObservaciones()+"<br>"
-					+ "  Fecha y Hora : "+ requestInformarActivacionBBVA.getFechaHora();	
-		    
-			this.envioCorreo(SUBJECT_ACTIVACION, body, null, CORREO_BBVA, CC, CCO);
+			List<Parametro> parametros= deliveryDao.getParametros(DELSERVICIOS_CORREO);
+			
+			for(Parametro parametro : parametros ){
+				if("BODY_ACTIVACION".equals(parametro.getCodigoc())){
+					bodyActivacion = parametro.getDescripcion();
+				}
+				if("SUBJECT_ACTIVACION".equals(parametro.getCodigoc())){
+					subjActivacion = parametro.getDescripcion();
+				}
+				if("CC".equals(parametro.getCodigoc())){
+					cc = parametro.getDescripcion();
+				}
+				if("CCO".equals(parametro.getCodigoc())){
+					cco = parametro.getDescripcion();
+				}
+				if("CORREO_BBVA".equals(parametro.getCodigoc())){
+					correo_bbva = parametro.getDescripcion();
+				}
+			}
+			
+			bodyActivacion = bodyActivacion.replace("{CLIENTE}", delivery.getNombrescli());
+			bodyActivacion = bodyActivacion.replace("{CODIGOENTREGA}", delivery.getIddelivery().toString());
+			bodyActivacion = bodyActivacion.replace("{FECHAHORA}", requestInformarActivacionBBVA.getFechaHora());
+
+			this.envioCorreo(subjActivacion, bodyActivacion, null, correo_bbva, cc, cco);
 			j.setCodigo(CODIGO_CORREO_CORRECTO);
 			j.setMensaje(MENSAJE_CORREO_CORRECTO);
 			responseInformarActivacionBBVA.setInformarActivacionBBVA(j);
@@ -464,7 +502,7 @@ public class DeliveryServiceImp implements DeliveryService {
 		}else{
 			pdf.setArchivo(file);
 			pdf.setCodigo("1");
-			pdf.setMensaje("El cï¿½digo de delivery no existe");
+			pdf.setMensaje("El código de delivery no existe");
 		}
 		
 		System.out.println("FIN Service: Ejecutando metodo getArchivoPDF");
@@ -502,7 +540,24 @@ public class DeliveryServiceImp implements DeliveryService {
 		String bodyMail = null;
 		String from = null;
 	    
-		from = FROM;
+		List<Parametro> parametros= deliveryDao.getParametros(DELSERVICIOS_CORREO);
+		
+		for(Parametro parametro : parametros ){
+			if("FROM".equals(parametro.getCodigoc())){
+				from = parametro.getAbreviatura();
+			}
+			if("USERAUTH".equals(parametro.getCodigoc())){
+				userAuth = parametro.getAbreviatura();
+			}
+			if("PASSAUTH".equals(parametro.getCodigoc())){
+				passAuth = parametro.getAbreviatura();
+			}
+			if("HOST".equals(parametro.getCodigoc())){
+				host = parametro.getAbreviatura();
+			}
+		}
+		
+		//from = FROM;
 		to.add(para);
 		cc.add(copia);
 		cco.add(copiaoculta);
@@ -514,9 +569,9 @@ public class DeliveryServiceImp implements DeliveryService {
 			listAdjunto.add(adjunto);
 		}
 		
-		userAuth = USERAUTH;
-		passAuth = PASSAUTH;
-		host = HOST;
+		//userAuth = USERAUTH;
+		//passAuth = PASSAUTH;
+		//host = HOST;
 
 		this.sendGeneral(from, to, cc, cco, subjectMail,
 				bodyMail, listAdjunto, null, null, null, userAuth,
