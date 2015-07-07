@@ -67,9 +67,6 @@ import bbva.delivery.services.dao.DeliveryDao;
 import bbva.delivery.services.dao.imp.DeliveryDaoImp;
 import bbva.delivery.services.service.DeliveryService;
 
-
-
-
 /**
  * @author dingan
  *
@@ -79,7 +76,7 @@ import bbva.delivery.services.service.DeliveryService;
 public class DeliveryServiceImp implements DeliveryService {
 	
 	private static Logger logger 					= Logger.getLogger(DeliveryServiceImp.class);
-	//Constantes de encriptación
+	//Constantes de encriptaciÃ³n
 	private final static String ALG = "AES";
     private final static String CI = "AES/CBC/PKCS5Padding";
     private final static String KEY = "92AE31A79FEEB2A3";
@@ -87,7 +84,7 @@ public class DeliveryServiceImp implements DeliveryService {
     
     //Transacciones
     private final static String CODIGO_TRX_CORRECTO = "0"; 
-    private final static String MENSAJE_TRX_CORRECTO = "Transacción correcta";
+    private final static String MENSAJE_TRX_CORRECTO = "TransacciÃ³n correcta";
     
     //Validar DNI
     private final static String CODIGO_USR_NOEXISTE= "002"; 
@@ -103,7 +100,7 @@ public class DeliveryServiceImp implements DeliveryService {
     private final static String CODIGO_CORREO_CORRECTO = "0"; 
     private final static String MENSAJE_CORREO_CORRECTO = "Correo Enviado con Exito"; 
     private final static String CODIGO_CORREO_ERROR = "1"; 
-    private final static String MENSAJE_CORREO_ERROR = "No se envió el correo, no existe entrega";
+    private final static String MENSAJE_CORREO_ERROR = "No se enviÃ³ el correo, no existe entrega";
     private final static String SUBJECT_ENTREGA = "InformarEntregaCourier";
     private final static String SUBJECT_ACTIVACION = "InformarActivacionBBVA";
     private final static String CORREO_BBVA = "soportedeliverybbva@gmail.com"; 
@@ -318,7 +315,7 @@ public class DeliveryServiceImp implements DeliveryService {
 			delivery = deliveries.get(0);
 			j = new InformarEntregaCourier();
 
-			body = "Se envía el informe de Entrega Courier, lo envia: "+delivery.getNombretercero()+"<br>"
+			body = "Se envï¿½a el informe de Entrega Courier, lo envia: "+delivery.getNombretercero()+"<br>"
 					+ "  Codigo de Entrega: "+delivery.getIddelivery().toString()+"<br>"
 					+ "  Estado: "+ requestInformarEntregaCourier.getEstado()+"<br>"
 					+ "  Observaciones : "+ requestInformarEntregaCourier.getObservaciones()+"<br>"
@@ -358,7 +355,7 @@ public class DeliveryServiceImp implements DeliveryService {
 			delivery = deliveries.get(0);
 			j = new InformarActivacionBBVA();
 			
-			body = "Se envía la Activacion de Tarjeta, del cliente: "+delivery.getNombrescli()+"<br>"
+			body = "Se envÃ­a la Activacion de Tarjeta, del cliente: "+delivery.getNombrescli()+"<br>"
 					+ "  Codigo de Entrega: "+delivery.getIddelivery().toString()+"<br>"
 					+ "  Estado: Tarjeta Activada<br>"
 				//	+ "  Observaciones : "+ requestInformarEntregaCourier.getObservaciones()+"<br>"
@@ -467,7 +464,7 @@ public class DeliveryServiceImp implements DeliveryService {
 		}else{
 			pdf.setArchivo(file);
 			pdf.setCodigo("1");
-			pdf.setMensaje("El código de delivery no existe");
+			pdf.setMensaje("El cï¿½digo de delivery no existe");
 		}
 		
 		System.out.println("FIN Service: Ejecutando metodo getArchivoPDF");
@@ -532,7 +529,7 @@ public class DeliveryServiceImp implements DeliveryService {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void sendGeneral(String from,List<String> to,List<String> cc,List<String> bcc,String subjectMail,String bodyMail,//elementos principales
 								   List<String> attachment,List<EmbeddedImages> embeddedImages ,//elementos adicionales sino mandar null
-								   String acuserecibo,String urlAcuse,//Acuse de recibo 1=SI,0 ó null=NO
+								   String acuserecibo,String urlAcuse,//Acuse de recibo 1=SI,0 ï¿½ null=NO
 								   String userAuth,String passAuth,String host) //parametros de autentificacion
 	{
 		logger.info("INI Service: Ejecutando metodo sendGeneral");

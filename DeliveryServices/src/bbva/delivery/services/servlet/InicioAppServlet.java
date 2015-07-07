@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import sas.seguridad.commons.ConfigurationProperties;
 import bbva.delivery.services.commons.Constants;
+import bbva.delivery.services.util.ConfigurationProperties;
 
 public class InicioAppServlet extends HttpServlet {
 

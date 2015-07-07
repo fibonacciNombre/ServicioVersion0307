@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-import sas.seguridad.commons.Constantes;
+import bbva.delivery.services.commons.Constants;
 
 public class ConfigurationProperties {
 
@@ -24,7 +24,7 @@ public static final String RUTA_ARCH_DEFAULT = "RUTA_ARCH_CONF";
 		String ruta = null;
 		
 		ruta = System.getProperty(RUTA_ARCH_DEFAULT)
-					+ Constantes.RUTA_SAS_CONFIG_PROPERTIES;
+					+ Constants.RUTA_FILE_CONFIGURACION_APP;
 		
 		return getExternalProperties(ruta, fileName);
 	}

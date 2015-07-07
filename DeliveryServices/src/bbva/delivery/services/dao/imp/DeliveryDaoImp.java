@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.sql.Types;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import oracle.jdbc.OracleTypes;
 
@@ -31,10 +30,6 @@ import bbva.delivery.services.comun.dao.imp.JdbcDaoBase;
 import bbva.delivery.services.dao.DeliveryDao;
 import bbva.delivery.services.util.JdbcHelper;
 
-
-
-
-
 /**
  * @author dingan
  *
@@ -50,7 +45,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	
 	private static DeliveryDaoImp instance;
 	
-	private static final ResourceBundle resources = ResourceBundle.getBundle("configuracion");
+//	private static final ResourceBundle resources = ResourceBundle.getBundle("configuracion");
 	
 	public DeliveryDaoImp() {
 		super();
