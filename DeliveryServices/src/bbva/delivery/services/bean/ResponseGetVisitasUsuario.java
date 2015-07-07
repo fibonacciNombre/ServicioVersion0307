@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-
 /**
  * @author dingan
  *

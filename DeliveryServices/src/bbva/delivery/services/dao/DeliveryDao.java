@@ -6,6 +6,7 @@ import bbva.delivery.services.bean.ArchivoGenerado;
 import bbva.delivery.services.bean.ArchivoPDF;
 import bbva.delivery.services.bean.Courier;
 import bbva.delivery.services.bean.Delivery;
+import bbva.delivery.services.bean.Parametro;
 import bbva.delivery.services.bean.RequestChangeEstadoRegistro;
 import bbva.delivery.services.bean.RequestGetVisitasUsuario;
 import bbva.delivery.services.bean.RequestInformarActivacionBBVA;
@@ -51,4 +52,6 @@ public interface DeliveryDao{
 	public ArchivoGenerado transferirArchivo( RequestTransferirArchivo requestTransferirArchivo);
 	
 	public List<ArchivoPDF> getArchivoPDF( ArchivoPDF archivoPDF);
+	
+	public List<Parametro> getParametros(String idparametrotipo);
 }

@@ -17,6 +17,7 @@ import bbva.delivery.services.bean.ArchivoGenerado;
 import bbva.delivery.services.bean.ArchivoPDF;
 import bbva.delivery.services.bean.Courier;
 import bbva.delivery.services.bean.Delivery;
+import bbva.delivery.services.bean.Parametro;
 import bbva.delivery.services.bean.RequestChangeEstadoRegistro;
 import bbva.delivery.services.bean.RequestGetVisitasUsuario;
 import bbva.delivery.services.bean.RequestInformarActivacionBBVA;
@@ -42,6 +43,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	private final static String PAQUETE_SERVICIOS = "PQ_DEL_SERVICIOS";
 	private final static String PAQUETE_COURIER = "pq_del_courier";
 	private final static String PAQUETE_USUARIO = "pq_del_usuario";
+	private final static String PAQUETE_COMUN = "pq_del_comun";
 	
 	private static DeliveryDaoImp instance;
 	
@@ -430,6 +432,32 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		return rcer;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Parametro> getParametros(String idparametrotipo){
+		
+		logger.debug("INI DAO: Ejecutando metodo getParametros");
+		System.out.println("INI DAO: Ejecutando metodo getParametros");
+		List<Parametro> rcer = null;
+		MapSqlParameterSource in = null;
+		
+		SimpleJdbcCall call= null;
+		Map<String, Object> out = null;
+		in = new MapSqlParameterSource();
+		
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_COMUN, "sp_lst_parametro");
+
+		JdbcHelper.setInParameter(call, in, "a_idparametrotipo", OracleTypes.VARCHAR, idparametrotipo);
+		JdbcHelper.setOutParameter(call, "a_cursor", OracleTypes.CURSOR, Parametro.class);
+		
+		out = call.execute(in);
+		
+		rcer = (List<Parametro>) out.get("a_cursor");
+		
+		System.out.println("FIN DAO: Ejecutando metodo getParametros");
+		logger.debug("FIN DAO: Ejecutando metodo getParametros");
+		
+		return rcer;
+	}
 
 }
 

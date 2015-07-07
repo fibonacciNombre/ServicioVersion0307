@@ -48,6 +48,12 @@ public class VisitasUsuario implements Serializable{
 	private String latitud;
 	
 	private String longitud;
+	
+	private String idpestado;
+	
+	private String idpestadocarga;
+	
+	private String idpestadodelivery;
 
 	public String getCodigoEntrega() {
 		return codigoEntrega;
@@ -160,5 +166,28 @@ public class VisitasUsuario implements Serializable{
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
-	
+
+	public String getIdpestado() {
+		return idpestado;
+	}
+
+	public void setIdpestado(String idpestado) {
+		this.idpestado = idpestado;
+	}
+
+	public String getIdpestadocarga() {
+		return idpestadocarga;
+	}
+
+	public void setIdpestadocarga(String idpestadocarga) {
+		this.idpestadocarga = idpestadocarga;
+	}
+
+	public String getIdpestadodelivery() {
+		return idpestadodelivery;
+	}
+
+	public void setIdpestadodelivery(String idpestadodelivery) {
+		this.idpestadodelivery = idpestadodelivery;
+	}	
 }
