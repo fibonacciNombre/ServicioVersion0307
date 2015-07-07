@@ -36,6 +36,7 @@ public class Delivery {
 	private BigDecimal idtercero;
 	private Integer idpestado;
 	private Integer idarchivo;
+	private Integer idpestadodelivery;
 	private Integer idpestadocarga;
 	private String mensajecarga;
 	private BigDecimal grupocarga;
@@ -286,4 +287,11 @@ public class Delivery {
 		this.nombretercero = nombretercero;
 	}
 
+	public Integer getIdpestadodelivery() {
+		return idpestadodelivery;
+	}
+
+	public void setIdpestadodelivery(Integer idpestadodelivery) {
+		this.idpestadodelivery = idpestadodelivery;
+	}
 }
