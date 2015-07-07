@@ -51,13 +51,11 @@ public class ServicesController {
 	
 	//Transacciones
     private final static String CODIGO_TRX_ERROR = "1"; 
-    private final static String MENSAJE_TRX_ERROR = "La autorizaciÛn de autenticaciÛn no es v·lido.";
+    private final static String MENSAJE_TRX_ERROR = "La autorizaci√≥n de autenticaci√≥n no es v√°lido.";
 	
 	@Autowired
 	DeliveryService deliveryService;
 	//INICIO DE LOS SERVICIOS
-	
-	
 	
 	/**
 	 * //RF - 04: Servicio que valida el DNI del courier
