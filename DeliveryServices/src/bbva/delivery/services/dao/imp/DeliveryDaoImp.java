@@ -60,27 +60,6 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	    return instance;
 	}
 	
-	
-	public void test() {
-		// TODO Auto-generated method stub
-		System.out.println("dao ok");
-
-	}	
-	
-	public void validarUsuarioToken(Usuario usuario){
-		usuario.setUsuario("too");
-		usuario.setContrasena("old");
-	}
-
-	public boolean validarUsuario(Usuario usuario) throws Exception{
-		
-		if ("android".equals(usuario.getCodusuario()) && "pepito123".equals(usuario.getContrasena()) ){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
 	//trae un usuario
 	@SuppressWarnings("unchecked")
 	public Usuario getUsuario(Usuario usuario){
@@ -99,7 +78,6 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		JdbcHelper.setOutParameter(call, "a_cursor", OracleTypes.CURSOR, Usuario.class);
 		
 		out = call.execute(in);
-		
 		
 		usr = (List<Usuario>) out.get("a_cursor");
 		

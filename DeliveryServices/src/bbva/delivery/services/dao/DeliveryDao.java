@@ -23,13 +23,8 @@ import bbva.delivery.services.bean.VisitasUsuario;
  *
  */
 public interface DeliveryDao{
-	void test();
-	
-	public void validarUsuarioToken(Usuario usuario);
 	
 	public List<Delivery> lstDelivery(Delivery param);
-	
-	public boolean validarUsuario(Usuario usuario) throws Exception;
 	
 	public List<Courier> obtenerListaCourier();
 	

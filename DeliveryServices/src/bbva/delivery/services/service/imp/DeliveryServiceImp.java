@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.UUID;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -65,7 +64,6 @@ import bbva.delivery.services.bean.Tx;
 import bbva.delivery.services.bean.Usuario;
 import bbva.delivery.services.bean.ValidarCourier;
 import bbva.delivery.services.dao.DeliveryDao;
-import bbva.delivery.services.dao.imp.DeliveryDaoImp;
 import bbva.delivery.services.service.DeliveryService;
 
 /**
@@ -85,7 +83,7 @@ public class DeliveryServiceImp implements DeliveryService {
     
     //Transacciones
     private final static String CODIGO_TRX_CORRECTO = "0"; 
-    private final static String MENSAJE_TRX_CORRECTO = "Transacción correcta";
+    private final static String MENSAJE_TRX_CORRECTO = "Transacciï¿½n correcta";
     
     //Validar DNI
     private final static String CODIGO_USR_NOEXISTE= "002"; 
@@ -101,44 +99,13 @@ public class DeliveryServiceImp implements DeliveryService {
     private final static String CODIGO_CORREO_CORRECTO = "0"; 
     private final static String MENSAJE_CORREO_CORRECTO = "Correo Enviado con Exito"; 
     private final static String CODIGO_CORREO_ERROR = "1"; 
-    private final static String MENSAJE_CORREO_ERROR = "No se envió el correo, no existe entrega";
+    private final static String MENSAJE_CORREO_ERROR = "No se enviï¿½ el correo, no existe entrega";
     
     //Parametros
     private final static String DELSERVICIOS_CORREO = "DELSERVICIOS_CORREO"; 
 
 	@Autowired
 	private DeliveryDao deliveryDao;
-
-	
-	public void test() {
-		// TODO Auto-generated method stub
-		System.out.println("service ok");
-		
-		deliveryDao.test();
-	}
-	
-	public void validarUsuarioToken(Usuario usuario) throws Exception{
-		logger.info("INI Service: Ejecutando metodo validarUsuarioToken");
-		System.out.println("INI Service: Ejecutando metodo validarUsuarioToken");
-		
-		DeliveryDaoImp daoImp = new DeliveryDaoImp();
-		String usuarioPassword = null;
-		String cadenaEncriptada = null;
-		String cadenaDesencriptada = null;
-		
-		String token = UUID.randomUUID().toString();
-		System.out.println("token random --> "+ token);
-		daoImp.validarUsuarioToken(usuario);
-		
-		usuarioPassword = usuario.getUsuario()+":"+usuario.getContrasena();
-		cadenaEncriptada = this.encriptar(KEY, IV, usuarioPassword);
-		cadenaDesencriptada = this.desencriptar(KEY, IV, cadenaEncriptada);
-		System.out.println("Encrip --> "+ cadenaEncriptada);
-		System.out.println("Desencrip --> "+ cadenaDesencriptada);
-		
-		System.out.println("FIN Service: Ejecutando metodo validarUsuarioToken");
-		logger.info("FIN Service: Ejecutando metodo validarUsuarioToken");
-	}
 	
 	public String encriptar(String key, String iv, String cleartext) throws Exception{
 		
@@ -502,7 +469,7 @@ public class DeliveryServiceImp implements DeliveryService {
 		}else{
 			pdf.setArchivo(file);
 			pdf.setCodigo("1");
-			pdf.setMensaje("El código de delivery no existe");
+			pdf.setMensaje("El cï¿½digo de delivery no existe");
 		}
 		
 		System.out.println("FIN Service: Ejecutando metodo getArchivoPDF");
