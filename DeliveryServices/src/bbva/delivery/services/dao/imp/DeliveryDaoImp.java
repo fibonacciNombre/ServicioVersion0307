@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Types;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import oracle.jdbc.OracleTypes;
 
@@ -27,6 +28,7 @@ import bbva.delivery.services.bean.RequestValidarCourier;
 import bbva.delivery.services.bean.Usuario;
 import bbva.delivery.services.bean.ValidarCourier;
 import bbva.delivery.services.bean.VisitasUsuario;
+import bbva.delivery.services.commons.ConstantsProperties;
 import bbva.delivery.services.comun.dao.imp.JdbcDaoBase;
 import bbva.delivery.services.dao.DeliveryDao;
 import bbva.delivery.services.util.JdbcHelper;
@@ -38,16 +40,15 @@ import bbva.delivery.services.util.JdbcHelper;
 @Repository("deliveryDao")
 public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 	
-	//private final static String ESQUEMA_BBVA = "BBVADESA";
-	private final static String ESQUEMA_BBVA = "BBVA";
-	private final static String PAQUETE_SERVICIOS = "PQ_DEL_SERVICIOS";
-	private final static String PAQUETE_COURIER = "pq_del_courier";
-	private final static String PAQUETE_USUARIO = "pq_del_usuario";
-	private final static String PAQUETE_COMUN = "pq_del_comun";
-	
 	private static DeliveryDaoImp instance;
 	
-//	private static final ResourceBundle resources = ResourceBundle.getBundle("configuracion");
+	private static final ResourceBundle resources = ResourceBundle.getBundle("configuracion");
+	
+	private final static String ESQUEMA_BBVA 		= resources.getString(ConstantsProperties.OWNER_ESQUEMA_DELIVERY);
+	private final static String PAQUETE_SERVICIO 	= resources.getString(ConstantsProperties.PQ_DEL_SERVICIO);
+	private final static String PAQUETE_COURIER 	= resources.getString(ConstantsProperties.PQ_DEL_COURIER);
+	private final static String PAQUETE_USUARIO 	= resources.getString(ConstantsProperties.PQ_DEL_USUARIO);
+	private final static String PAQUETE_COMUN 		= resources.getString(ConstantsProperties.PQ_DEL_COMUN);
 	
 	public DeliveryDaoImp() {
 		super();
@@ -72,7 +73,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_obt_usuario_servicio");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_obt_usuario_servicio");
 		
 		JdbcHelper.setInOutParameter(call,in,"a_codusuario",Types.VARCHAR,usuario.getCodusuario());
 		JdbcHelper.setOutParameter(call, "a_cursor", OracleTypes.CURSOR, Usuario.class);
@@ -214,7 +215,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_lst_visitas_usuario");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_lst_visitas_usuario");
 		
 		JdbcHelper.setInParameter(call, in, "a_codbbva", OracleTypes.VARCHAR, requestGetVisitasUsuario.getCodbbva());
 		JdbcHelper.setInParameter(call, in, "a_nrodocumento", OracleTypes.VARCHAR, requestGetVisitasUsuario.getDni());
@@ -242,7 +243,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_validar_usuario");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_validar_usuario");
 		
 		JdbcHelper.setInParameter(call, in, "a_codbbva", OracleTypes.VARCHAR, requestValidarCourier.getCodbbva());
 		JdbcHelper.setInParameter(call, in, "a_nrodocumento", OracleTypes.VARCHAR, requestValidarCourier.getDni());
@@ -270,7 +271,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_act_delivery_entrega");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_act_delivery_entrega");
 
 		JdbcHelper.setInParameter(call, in, "a_iddelivery", OracleTypes.NUMERIC, requestChangeEstadoRegistro.getCodigoEntrega());
 		JdbcHelper.setInParameter(call, in, "a_estado", OracleTypes.NUMERIC, requestChangeEstadoRegistro.getEstado());
@@ -305,7 +306,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_obt_delivery_servicio");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_obt_delivery_servicio");
 		
 		JdbcHelper.setInParameter(call, in, "a_nrodocumento", OracleTypes.VARCHAR, requestInformarEntregaCourier.getDni());
 		JdbcHelper.setInParameter(call, in, "a_codbbva", OracleTypes.VARCHAR, requestInformarEntregaCourier.getCodbbva());
@@ -333,7 +334,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_obt_delivery_servicio");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_obt_delivery_servicio");
 		
 		JdbcHelper.setInParameter(call, in, "a_nrodocumento", OracleTypes.VARCHAR, requestInformarActivacionBBVA.getDni());
 		JdbcHelper.setInParameter(call, in, "a_codbbva", OracleTypes.VARCHAR, null);
@@ -361,7 +362,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_act_delivery_archivo_pdf");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_act_delivery_archivo_pdf");
 
 		JdbcHelper.setInParameter(call, in, "a_iddelivery", OracleTypes.NUMERIC, requestTransferirArchivo.getCodigoEntrega());
 		//JdbcHelper.setInParameter(call, in, "a_codbbva", OracleTypes.VARCHAR, requestChangeEstadoRegistro.getCodbbva());
@@ -391,7 +392,7 @@ public class DeliveryDaoImp extends JdbcDaoBase implements DeliveryDao {
 		Map<String, Object> out = null;
 		in = new MapSqlParameterSource();
 		
-		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIOS, "sp_obt_delivery_archivo_pdf");
+		call = JdbcHelper.initializeSimpleJdbcCallProcedure(getJdbcTemplate(), ESQUEMA_BBVA, PAQUETE_SERVICIO, "sp_obt_delivery_archivo_pdf");
 
 		JdbcHelper.setInParameter(call, in, "a_iddelivery", OracleTypes.NUMERIC, archivoPDF.getCodigoEntrega());
 		//JdbcHelper.setInParameter(call, in, "a_codbbva", OracleTypes.VARCHAR, requestChangeEstadoRegistro.getCodbbva());
