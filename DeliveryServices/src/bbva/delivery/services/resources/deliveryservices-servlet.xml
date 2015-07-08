@@ -71,6 +71,6 @@
 	 
 	<bean id="auditaController" class="bbva.delivery.services.aspecto.AuditaController" />
 
-<!-- <bean id="deliveryserviceProperties" class="bbva.delivery.services.util.DeliveryProperties"></bean> -->
+	<bean id="deliveryserviceProperties" class="bbva.delivery.services.util.DeliveryProperties"></bean>
 	
 </beans>
