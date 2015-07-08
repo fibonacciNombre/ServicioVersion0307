@@ -25,13 +25,6 @@
 						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 						http://www.springframework.org/schema/lang 
 						http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
-
-<!-- 	<bean id="methodNameResolver" -->
-<!-- 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"> -->
-<!-- 		<property name="paramName"> -->
-<!-- 			<value>method</value> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
 	
 	<context:component-scan base-package="
         bbva.delivery.services.controller" />
@@ -43,20 +36,7 @@
 	<aop:aspectj-autoproxy />
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-<!-- 	<bean id="urlMapping" -->
-<!-- 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
-<!-- 		<property name="mappings"> -->
-<!-- 			<props> -->
-<!-- 				<prop key="/delivery.do">deliveryController</prop> -->
-<!-- 			</props> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
 
-<!-- 	<bean id="deliveryController" 	class="bbva.delivery.services.controller.DeliveryController"> -->
-<!-- 		<property name="methodNameResolver" ref="methodNameResolver" /> -->
-<!-- 	</bean> -->
-	
-	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/jsp/" />
@@ -91,6 +71,6 @@
 	 
 	<bean id="auditaController" class="bbva.delivery.services.aspecto.AuditaController" />
 
-<!-- 	<bean id="portalwebconfig" class="bbva.delivery.services.util.DeliveryProperties"></bean> -->
+<!-- <bean id="deliveryserviceProperties" class="bbva.delivery.services.util.DeliveryProperties"></bean> -->
 	
 </beans>
