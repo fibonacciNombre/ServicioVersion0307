@@ -54,7 +54,7 @@ public class InicioAppServlet extends HttpServlet {
 			
 			System.out.println("Informacion acerca de la configuracion del log4j");
 			System.out.println("RUTA -> " + rutaLog4j);
-			System.out.println("Obteniendo los parametros de verificaci�n");
+			System.out.println("Obteniendo los parametros de verificacion");
 			
 			logger.info("[---- INICIADO APLICACION DELIVERY SERVICIOS ----]");
 			

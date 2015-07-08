@@ -83,7 +83,7 @@ public class DeliveryServiceImp implements DeliveryService {
     
     //Transacciones
     private final static String CODIGO_TRX_CORRECTO = "0"; 
-    private final static String MENSAJE_TRX_CORRECTO = "Transacci�n correcta";
+    private final static String MENSAJE_TRX_CORRECTO = "Transaccion correcta";
     
     //Validar DNI
     private final static String CODIGO_USR_NOEXISTE= "002"; 
@@ -99,7 +99,7 @@ public class DeliveryServiceImp implements DeliveryService {
     private final static String CODIGO_CORREO_CORRECTO = "0"; 
     private final static String MENSAJE_CORREO_CORRECTO = "Correo Enviado con Exito"; 
     private final static String CODIGO_CORREO_ERROR = "1"; 
-    private final static String MENSAJE_CORREO_ERROR = "No se envi� el correo, no existe entrega";
+    private final static String MENSAJE_CORREO_ERROR = "No se envio el correo, no existe entrega";
     
     //Parametros
     private final static String DELSERVICIOS_CORREO = "DELSERVICIOS_CORREO"; 

@@ -51,7 +51,7 @@ public class ServicesController {
 	
 	//Transacciones
     private final static String CODIGO_TRX_ERROR = "1"; 
-    private final static String MENSAJE_TRX_ERROR = "La autorización de autenticación no es válido.";
+    private final static String MENSAJE_TRX_ERROR = "La autorizacion de autenticacion no es valido.";
 	
 	@Autowired
 	DeliveryService deliveryService;
